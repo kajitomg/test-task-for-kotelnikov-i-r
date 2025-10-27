@@ -1,0 +1,38 @@
+services:
+
+  database:
+    container_name: database
+    image: postgres:alpine
+    env_file:
+      - ../.env
+    volumes:
+      - database_data:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:5432
+    networks:
+      - server-network
+
+  seed:
+    container_name: seed
+    build:
+      context: ../server
+      dockerfile: ../docker/server.Dockerfile
+      target: seed
+    env_file:
+      - ../.env
+      - ../server/.env
+    depends_on:
+      - database
+    networks:
+      - server-network
+    command: npm run prisma:seed
+    volumes:
+      - ../server:/opt/app
+      - node_modules:/opt/app/node_modules
+
+volumes:
+  node_modules:
+  database_data:
+
+networks:
+  server-network:

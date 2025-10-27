@@ -1,0 +1,74 @@
+FROM node:22-alpine AS base
+
+WORKDIR /opt/app
+
+COPY package*.json ./
+COPY prisma ./prisma/
+
+
+
+FROM base AS dependencies
+
+RUN npm ci
+
+
+
+FROM dependencies AS dev
+
+COPY . .
+
+EXPOSE 3000
+
+ENV NODE_ENV=dev
+
+CMD ["npm", "run", "dev"]
+
+
+
+FROM dependencies AS migrate
+
+RUN apk add --no-cache openssl
+
+RUN npx prisma generate
+
+
+
+FROM dependencies AS seed
+
+RUN apk add --no-cache openssl
+
+RUN npx prisma generate
+
+
+
+FROM base AS builder
+
+COPY --from=dependencies /opt/app/node_modules ./node_modules
+
+COPY . .
+
+RUN npm run build
+
+RUN npm ci --only=production
+
+
+
+FROM node:22-alpine AS production
+
+RUN addgroup --system --gid 1001 server_user && \
+    adduser --system --uid 1001 server_user
+
+WORKDIR /opt/app
+
+COPY --from=builder --chown=server_user:server_user /opt/app/package*.json ./
+COPY --from=builder --chown=server_user:server_user /opt/app/node_modules ./node_modules
+COPY --from=builder --chown=server_user:server_user /opt/app/dist ./dist
+COPY --from=builder --chown=server_user:server_user /opt/app/prisma ./prisma
+
+USER server_user
+
+EXPOSE 3000
+
+ENV NODE_ENV=production
+
+CMD ["npmx", "run", "start"]

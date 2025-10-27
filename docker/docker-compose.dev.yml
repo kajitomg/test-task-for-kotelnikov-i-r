@@ -1,0 +1,66 @@
+services:
+  server:
+    container_name: server
+    build:
+      dockerfile: ../docker/server.Dockerfile
+      context: ../server
+      target: dev
+    depends_on:
+      database:
+        condition: service_started
+    env_file:
+      - ../.env
+      - ../server/.env
+    ports:
+      - "3000:3000"
+    develop:
+      watch:
+        - action: sync
+          path: ../server/src
+          target: /opt/app/src
+        - action: sync
+          path: ../server/node_modules
+          target: /opt/app/node_modules
+        - action: sync
+          path: ../server/prisma
+          target: /opt/app/prisma
+        - action: rebuild
+          path: ../server/package.json
+        - action: rebuild
+          path: ../server/package-lock.json
+
+    networks:
+      - server-network
+
+  database:
+    container_name: database
+    image: postgres:alpine
+    env_file:
+      - ../.env
+    volumes:
+      - database_data:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:5432
+    networks:
+      - server-network
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    depends_on:
+      - database
+    env_file:
+      - ../.env
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - server-network
+    ports:
+      - 5050:80
+
+volumes:
+  database_data:
+  pgadmin_data:
+
+networks:
+  server-network:
