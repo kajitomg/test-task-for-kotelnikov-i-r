@@ -1,8 +1,10 @@
 import { PrismaClient } from '../src/generated/prisma/client';
+import { seedUsers } from './seeds/user';
 
 const prisma = new PrismaClient()
 
 async function main() {
+  await seedUsers(prisma)
 }
 
 main()
