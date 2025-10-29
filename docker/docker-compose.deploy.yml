@@ -25,7 +25,10 @@ services:
       - database
     networks:
       - server-network
-    command: npx prisma migrate deploy && npx prisma generate
+    volumes:
+      - ../server/src:/opt/app/src
+      - ../server/prisma:/opt/app/prisma
+    command: npm run prisma:deploy
 
 volumes:
   database_data:

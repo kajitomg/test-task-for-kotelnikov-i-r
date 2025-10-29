@@ -13,9 +13,22 @@ RUN npm ci
 
 
 
-FROM dependencies AS dev
+FROM dependencies AS deploy
+
+RUN apk add --no-cache openssl
+
+COPY tsconfig.json ./
+
+RUN npx prisma generate
+
+
+
+FROM base AS dev
 
 COPY . .
+
+COPY --from=deploy /opt/app/src/generated ./src/generated
+COPY --from=dependencies /opt/app/node_modules ./node_modules
 
 RUN npm i nodemon
 
@@ -27,14 +40,6 @@ CMD ["npm", "run", "dev"]
 
 
 
-FROM dependencies AS deploy
-
-RUN apk add --no-cache openssl
-
-RUN npx prisma generate
-
-
-
 FROM base AS builder
 
 COPY . .
@@ -42,9 +47,9 @@ COPY . .
 COPY --from=deploy /opt/app/src/generated ./src/generated
 COPY --from=dependencies /opt/app/node_modules ./node_modules
 
-RUN npm run build
+RUN npm prune --dev
 
-RUN npm prune --production
+RUN npm run build
 
 
 

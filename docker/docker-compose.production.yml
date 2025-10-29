@@ -15,6 +15,7 @@ services:
       - "3000:3000"
     networks:
       - server-network
+    command: npm run start
 
   database:
     container_name: database

@@ -34,13 +34,13 @@ async function executeWithRetry<T>(
       return result
     } catch (error: any) {
       lastError = error
-      
       const isLastAttempt = attempt === maxRetries - 1
       const isRetryable =
         error.code === 'P2034' ||
         error.code === '40001' ||
         error.message?.includes('write conflict') ||
-        error.message?.includes('deadlock')
+        error.message?.includes('deadlock') ||
+        error.message?.includes('TransactionWriteConflict')
       
       if (!isRetryable || isLastAttempt) {
         throw error
@@ -62,7 +62,6 @@ async function executeWithRetry<T>(
       await new Promise(resolve => setTimeout(resolve, delay))
     }
   }
-  
   throw lastError
 }
 
