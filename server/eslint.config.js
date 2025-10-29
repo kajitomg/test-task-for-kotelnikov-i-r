@@ -11,8 +11,8 @@ export default defineConfig([
   ...tseslint.configs.recommended,
   eslintPluginUnicorn.configs['recommended'],
   {
-    files: ['**/*.{js,ts}'],
-    ignores: ['**/*.js', 'dist/**/*', 'node_modules/**/*'],
+    files: ['**/*.ts'],
+    ignores: ['dist/**/*', 'node_modules/**/*'],
     plugins: {
       'simple-import-sort': simpleImportSort,
     },
@@ -26,7 +26,7 @@ export default defineConfig([
     },
   },
   {
-    files: ['src/**/*.test.{js,ts}'],
+    files: ['src/**/*.test.ts'],
     ...vitest.configs.recommended,
   },
   eslintPluginPrettierRecommended,

@@ -17,6 +17,8 @@ FROM dependencies AS dev
 
 COPY . .
 
+RUN npm i nodemon
+
 EXPOSE 3000
 
 ENV NODE_ENV=dev
@@ -25,15 +27,7 @@ CMD ["npm", "run", "dev"]
 
 
 
-FROM dependencies AS migrate
-
-RUN apk add --no-cache openssl
-
-RUN npx prisma generate
-
-
-
-FROM dependencies AS seed
+FROM dependencies AS deploy
 
 RUN apk add --no-cache openssl
 

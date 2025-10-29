@@ -1,15 +1,15 @@
 import { PrismaClient } from '../src/generated/prisma/client';
-import { seedUsers } from './seeds/user';
+import { seedEvents } from './seeds/event';
 
 const prisma = new PrismaClient()
 
 async function main() {
-  await seedUsers(prisma)
+  await seedEvents(prisma)
 }
 
 main()
   .catch((e) => {
-    console.error('Seed error:', e)
+    console.error('Ошибка посева:', e)
     process.exit(1)
   })
   .finally(async () => {

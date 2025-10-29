@@ -8,35 +8,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        Int       @id @default(autoincrement())
-  name      String    @unique
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  bookings  Booking[]
-
-  @@map("users")
-}
-
 model Event {
   id          Int       @id @default(autoincrement())
+  slug        String    @unique
   name        String
   total_seats Int
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
   bookings    Booking[]
 
   @@map("events")
 }
 
 model Booking {
-  id          Int      @id @default(autoincrement())
-  user_id     Int
-  user        User     @relation(fields: [user_id], references: [id])
+  id          Int       @id @default(autoincrement())
+  user_id     String
   event_id    Int
-  event       Event    @relation(fields: [event_id], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  event       Event     @relation(fields: [event_id], references: [id])
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
 
   @@unique([user_id, event_id])
   @@map("bookings")

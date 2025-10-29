@@ -11,23 +11,12 @@ services:
     env_file:
       - ../.env
       - ../server/.env
+    volumes:
+      - ../server/src:/opt/app/src
+      - ../server/prisma:/opt/app/prisma
     ports:
       - "3000:3000"
-    develop:
-      watch:
-        - action: sync
-          path: ../server/src
-          target: /opt/app/src
-        - action: sync
-          path: ../server/node_modules
-          target: /opt/app/node_modules
-        - action: sync
-          path: ../server/prisma
-          target: /opt/app/prisma
-        - action: rebuild
-          path: ../server/package.json
-        - action: rebuild
-          path: ../server/package-lock.json
+    command: npx nodemon --watch src --ext ts --exec tsx -L src/index.ts
 
     networks:
       - server-network

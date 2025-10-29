@@ -1,11 +1,16 @@
 import request from 'supertest';
 import { describe, expect, test } from 'vitest';
-
 import { App } from '../../app.js';
 
-describe('/api/v1/health', () => {
-  test('дано: запрос GET, ожидается: возврат статуса 200 с сообщением, отметкой времени и временем работы', async () => {
-    const app = App();
+async function setup() {
+  const app = App();
+  
+  return { app};
+}
+
+describe('/api/v1/health', async () => {
+  test('дано: запрос GET, ожидается: успешное(200) выполнение с message = "ОК", timestamp и uptime', async () => {
+    const { app } = await setup();
     
     const actual = await request(app).get('/api/v1/health').expect(200);
     const expected = {

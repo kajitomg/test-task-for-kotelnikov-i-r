@@ -8,8 +8,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/library"
-import type * as $Enums from "../enums.js"
-import type * as Prisma from "../internal/prismaNamespace.js"
+import type * as $Enums from "../enums.ts"
+import type * as Prisma from "../internal/prismaNamespace.ts"
 
 /**
  * Model Booking
@@ -27,51 +27,47 @@ export type AggregateBooking = {
 
 export type BookingAvgAggregateOutputType = {
   id: number | null
-  user_id: number | null
   event_id: number | null
 }
 
 export type BookingSumAggregateOutputType = {
   id: number | null
-  user_id: number | null
   event_id: number | null
 }
 
 export type BookingMinAggregateOutputType = {
   id: number | null
-  user_id: number | null
+  user_id: string | null
   event_id: number | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type BookingMaxAggregateOutputType = {
   id: number | null
-  user_id: number | null
+  user_id: string | null
   event_id: number | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type BookingCountAggregateOutputType = {
   id: number
   user_id: number
   event_id: number
-  createdAt: number
-  updatedAt: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
 
 export type BookingAvgAggregateInputType = {
   id?: true
-  user_id?: true
   event_id?: true
 }
 
 export type BookingSumAggregateInputType = {
   id?: true
-  user_id?: true
   event_id?: true
 }
 
@@ -79,24 +75,24 @@ export type BookingMinAggregateInputType = {
   id?: true
   user_id?: true
   event_id?: true
-  createdAt?: true
-  updatedAt?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type BookingMaxAggregateInputType = {
   id?: true
   user_id?: true
   event_id?: true
-  createdAt?: true
-  updatedAt?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type BookingCountAggregateInputType = {
   id?: true
   user_id?: true
   event_id?: true
-  createdAt?: true
-  updatedAt?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -188,10 +184,10 @@ export type BookingGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type BookingGroupByOutputType = {
   id: number
-  user_id: number
+  user_id: string
   event_id: number
-  createdAt: Date
-  updatedAt: Date
+  created_at: Date
+  updated_at: Date
   _count: BookingCountAggregateOutputType | null
   _avg: BookingAvgAggregateOutputType | null
   _sum: BookingSumAggregateOutputType | null
@@ -219,11 +215,10 @@ export type BookingWhereInput = {
   OR?: Prisma.BookingWhereInput[]
   NOT?: Prisma.BookingWhereInput | Prisma.BookingWhereInput[]
   id?: Prisma.IntFilter<"Booking"> | number
-  user_id?: Prisma.IntFilter<"Booking"> | number
+  user_id?: Prisma.StringFilter<"Booking"> | string
   event_id?: Prisma.IntFilter<"Booking"> | number
-  createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  created_at?: Prisma.DateTimeFilter<"Booking"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Booking"> | Date | string
   event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
 }
 
@@ -231,9 +226,8 @@ export type BookingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   event_id?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   event?: Prisma.EventOrderByWithRelationInput
 }
 
@@ -243,11 +237,10 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.BookingWhereInput | Prisma.BookingWhereInput[]
   OR?: Prisma.BookingWhereInput[]
   NOT?: Prisma.BookingWhereInput | Prisma.BookingWhereInput[]
-  user_id?: Prisma.IntFilter<"Booking"> | number
+  user_id?: Prisma.StringFilter<"Booking"> | string
   event_id?: Prisma.IntFilter<"Booking"> | number
-  createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  created_at?: Prisma.DateTimeFilter<"Booking"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Booking"> | Date | string
   event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
 }, "id" | "user_id_event_id">
 
@@ -255,8 +248,8 @@ export type BookingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   event_id?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.BookingCountOrderByAggregateInput
   _avg?: Prisma.BookingAvgOrderByAggregateInput
   _max?: Prisma.BookingMaxOrderByAggregateInput
@@ -269,61 +262,62 @@ export type BookingScalarWhereWithAggregatesInput = {
   OR?: Prisma.BookingScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BookingScalarWhereWithAggregatesInput | Prisma.BookingScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Booking"> | number
-  user_id?: Prisma.IntWithAggregatesFilter<"Booking"> | number
+  user_id?: Prisma.StringWithAggregatesFilter<"Booking"> | string
   event_id?: Prisma.IntWithAggregatesFilter<"Booking"> | number
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
 }
 
 export type BookingCreateInput = {
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutBookingsInput
+  user_id: string
+  created_at?: Date | string
+  updated_at?: Date | string
   event: Prisma.EventCreateNestedOneWithoutBookingsInput
 }
 
 export type BookingUncheckedCreateInput = {
   id?: number
-  user_id: number
+  user_id: string
   event_id: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type BookingUpdateInput = {
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   event?: Prisma.EventUpdateOneRequiredWithoutBookingsNestedInput
 }
 
 export type BookingUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
   event_id?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BookingCreateManyInput = {
   id?: number
-  user_id: number
+  user_id: string
   event_id: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type BookingUpdateManyMutationInput = {
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BookingUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
   event_id?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BookingListRelationFilter = {
@@ -337,7 +331,7 @@ export type BookingOrderByRelationAggregateInput = {
 }
 
 export type BookingUser_idEvent_idCompoundUniqueInput = {
-  user_id: number
+  user_id: string
   event_id: number
 }
 
@@ -345,13 +339,12 @@ export type BookingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   event_id?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type BookingAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
   event_id?: Prisma.SortOrder
 }
 
@@ -359,64 +352,21 @@ export type BookingMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   event_id?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type BookingMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   event_id?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type BookingSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
   event_id?: Prisma.SortOrder
-}
-
-export type BookingCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.BookingCreateWithoutUserInput, Prisma.BookingUncheckedCreateWithoutUserInput> | Prisma.BookingCreateWithoutUserInput[] | Prisma.BookingUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutUserInput | Prisma.BookingCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.BookingCreateManyUserInputEnvelope
-  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
-}
-
-export type BookingUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.BookingCreateWithoutUserInput, Prisma.BookingUncheckedCreateWithoutUserInput> | Prisma.BookingCreateWithoutUserInput[] | Prisma.BookingUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutUserInput | Prisma.BookingCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.BookingCreateManyUserInputEnvelope
-  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
-}
-
-export type BookingUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.BookingCreateWithoutUserInput, Prisma.BookingUncheckedCreateWithoutUserInput> | Prisma.BookingCreateWithoutUserInput[] | Prisma.BookingUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutUserInput | Prisma.BookingCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.BookingUpsertWithWhereUniqueWithoutUserInput | Prisma.BookingUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.BookingCreateManyUserInputEnvelope
-  set?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
-  disconnect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
-  delete?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
-  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
-  update?: Prisma.BookingUpdateWithWhereUniqueWithoutUserInput | Prisma.BookingUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.BookingUpdateManyWithWhereWithoutUserInput | Prisma.BookingUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
-}
-
-export type BookingUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.BookingCreateWithoutUserInput, Prisma.BookingUncheckedCreateWithoutUserInput> | Prisma.BookingCreateWithoutUserInput[] | Prisma.BookingUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutUserInput | Prisma.BookingCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.BookingUpsertWithWhereUniqueWithoutUserInput | Prisma.BookingUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.BookingCreateManyUserInputEnvelope
-  set?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
-  disconnect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
-  delete?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
-  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
-  update?: Prisma.BookingUpdateWithWhereUniqueWithoutUserInput | Prisma.BookingUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.BookingUpdateManyWithWhereWithoutUserInput | Prisma.BookingUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
 }
 
 export type BookingCreateNestedManyWithoutEventInput = {
@@ -461,67 +411,17 @@ export type BookingUncheckedUpdateManyWithoutEventNestedInput = {
   deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
 }
 
-export type BookingCreateWithoutUserInput = {
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  event: Prisma.EventCreateNestedOneWithoutBookingsInput
-}
-
-export type BookingUncheckedCreateWithoutUserInput = {
-  id?: number
-  event_id: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type BookingCreateOrConnectWithoutUserInput = {
-  where: Prisma.BookingWhereUniqueInput
-  create: Prisma.XOR<Prisma.BookingCreateWithoutUserInput, Prisma.BookingUncheckedCreateWithoutUserInput>
-}
-
-export type BookingCreateManyUserInputEnvelope = {
-  data: Prisma.BookingCreateManyUserInput | Prisma.BookingCreateManyUserInput[]
-  skipDuplicates?: boolean
-}
-
-export type BookingUpsertWithWhereUniqueWithoutUserInput = {
-  where: Prisma.BookingWhereUniqueInput
-  update: Prisma.XOR<Prisma.BookingUpdateWithoutUserInput, Prisma.BookingUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.BookingCreateWithoutUserInput, Prisma.BookingUncheckedCreateWithoutUserInput>
-}
-
-export type BookingUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.BookingWhereUniqueInput
-  data: Prisma.XOR<Prisma.BookingUpdateWithoutUserInput, Prisma.BookingUncheckedUpdateWithoutUserInput>
-}
-
-export type BookingUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.BookingScalarWhereInput
-  data: Prisma.XOR<Prisma.BookingUpdateManyMutationInput, Prisma.BookingUncheckedUpdateManyWithoutUserInput>
-}
-
-export type BookingScalarWhereInput = {
-  AND?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
-  OR?: Prisma.BookingScalarWhereInput[]
-  NOT?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
-  id?: Prisma.IntFilter<"Booking"> | number
-  user_id?: Prisma.IntFilter<"Booking"> | number
-  event_id?: Prisma.IntFilter<"Booking"> | number
-  createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
-}
-
 export type BookingCreateWithoutEventInput = {
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutBookingsInput
+  user_id: string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type BookingUncheckedCreateWithoutEventInput = {
   id?: number
-  user_id: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  user_id: string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type BookingCreateOrConnectWithoutEventInput = {
@@ -550,58 +450,42 @@ export type BookingUpdateManyWithWhereWithoutEventInput = {
   data: Prisma.XOR<Prisma.BookingUpdateManyMutationInput, Prisma.BookingUncheckedUpdateManyWithoutEventInput>
 }
 
-export type BookingCreateManyUserInput = {
-  id?: number
-  event_id: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type BookingUpdateWithoutUserInput = {
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  event?: Prisma.EventUpdateOneRequiredWithoutBookingsNestedInput
-}
-
-export type BookingUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  event_id?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type BookingUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  event_id?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type BookingScalarWhereInput = {
+  AND?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
+  OR?: Prisma.BookingScalarWhereInput[]
+  NOT?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
+  id?: Prisma.IntFilter<"Booking"> | number
+  user_id?: Prisma.StringFilter<"Booking"> | string
+  event_id?: Prisma.IntFilter<"Booking"> | number
+  created_at?: Prisma.DateTimeFilter<"Booking"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Booking"> | Date | string
 }
 
 export type BookingCreateManyEventInput = {
   id?: number
-  user_id: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  user_id: string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type BookingUpdateWithoutEventInput = {
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BookingUncheckedUpdateWithoutEventInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_id?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BookingUncheckedUpdateManyWithoutEventInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_id?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -610,9 +494,8 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   id?: boolean
   user_id?: boolean
   event_id?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  created_at?: boolean
+  updated_at?: boolean
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
@@ -620,9 +503,8 @@ export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   id?: boolean
   user_id?: boolean
   event_id?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  created_at?: boolean
+  updated_at?: boolean
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
@@ -630,9 +512,8 @@ export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   id?: boolean
   user_id?: boolean
   event_id?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  created_at?: boolean
+  updated_at?: boolean
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
@@ -640,36 +521,32 @@ export type BookingSelectScalar = {
   id?: boolean
   user_id?: boolean
   event_id?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "event_id" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "event_id" | "created_at" | "updated_at", ExtArgs["result"]["booking"]>
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
 }
 export type BookingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
 }
 export type BookingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
 }
 
 export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Booking"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     event: Prisma.$EventPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    user_id: number
+    user_id: string
     event_id: number
-    createdAt: Date
-    updatedAt: Date
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["booking"]>
   composites: {}
 }
@@ -1064,7 +941,6 @@ readonly fields: BookingFieldRefs;
  */
 export interface Prisma__BookingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   event<T extends Prisma.EventDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventDefaultArgs<ExtArgs>>): Prisma.Prisma__EventClient<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1096,10 +972,10 @@ export interface Prisma__BookingClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface BookingFieldRefs {
   readonly id: Prisma.FieldRef<"Booking", 'Int'>
-  readonly user_id: Prisma.FieldRef<"Booking", 'Int'>
+  readonly user_id: Prisma.FieldRef<"Booking", 'String'>
   readonly event_id: Prisma.FieldRef<"Booking", 'Int'>
-  readonly createdAt: Prisma.FieldRef<"Booking", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"Booking", 'DateTime'>
+  readonly created_at: Prisma.FieldRef<"Booking", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"Booking", 'DateTime'>
 }
     
 

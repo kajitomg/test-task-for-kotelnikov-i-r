@@ -12,12 +12,12 @@ services:
     networks:
       - server-network
 
-  seed:
-    container_name: seed
+  deploy:
+    container_name: deploy
     build:
       context: ../server
       dockerfile: ../docker/server.Dockerfile
-      target: seed
+      target: deploy
     env_file:
       - ../.env
       - ../server/.env
@@ -25,13 +25,9 @@ services:
       - database
     networks:
       - server-network
-    command: npm run prisma:seed
-    volumes:
-      - ../server:/opt/app
-      - node_modules:/opt/app/node_modules
+    command: npx prisma migrate deploy
 
 volumes:
-  node_modules:
   database_data:
 
 networks:

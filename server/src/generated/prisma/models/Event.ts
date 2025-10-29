@@ -8,8 +8,8 @@
  * 🟢 You can import this file directly.
  */
 import type * as runtime from "@prisma/client/runtime/library"
-import type * as $Enums from "../enums.js"
-import type * as Prisma from "../internal/prismaNamespace.js"
+import type * as $Enums from "../enums.ts"
+import type * as Prisma from "../internal/prismaNamespace.ts"
 
 /**
  * Model Event
@@ -37,26 +37,29 @@ export type EventSumAggregateOutputType = {
 
 export type EventMinAggregateOutputType = {
   id: number | null
+  slug: string | null
   name: string | null
   total_seats: number | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type EventMaxAggregateOutputType = {
   id: number | null
+  slug: string | null
   name: string | null
   total_seats: number | null
-  createdAt: Date | null
-  updatedAt: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type EventCountAggregateOutputType = {
   id: number
+  slug: number
   name: number
   total_seats: number
-  createdAt: number
-  updatedAt: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
@@ -73,26 +76,29 @@ export type EventSumAggregateInputType = {
 
 export type EventMinAggregateInputType = {
   id?: true
+  slug?: true
   name?: true
   total_seats?: true
-  createdAt?: true
-  updatedAt?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type EventMaxAggregateInputType = {
   id?: true
+  slug?: true
   name?: true
   total_seats?: true
-  createdAt?: true
-  updatedAt?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type EventCountAggregateInputType = {
   id?: true
+  slug?: true
   name?: true
   total_seats?: true
-  createdAt?: true
-  updatedAt?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -184,10 +190,11 @@ export type EventGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type EventGroupByOutputType = {
   id: number
+  slug: string
   name: string
   total_seats: number
-  createdAt: Date
-  updatedAt: Date
+  created_at: Date
+  updated_at: Date
   _count: EventCountAggregateOutputType | null
   _avg: EventAvgAggregateOutputType | null
   _sum: EventSumAggregateOutputType | null
@@ -215,40 +222,44 @@ export type EventWhereInput = {
   OR?: Prisma.EventWhereInput[]
   NOT?: Prisma.EventWhereInput | Prisma.EventWhereInput[]
   id?: Prisma.IntFilter<"Event"> | number
+  slug?: Prisma.StringFilter<"Event"> | string
   name?: Prisma.StringFilter<"Event"> | string
   total_seats?: Prisma.IntFilter<"Event"> | number
-  createdAt?: Prisma.DateTimeFilter<"Event"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Event"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"Event"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Event"> | Date | string
   bookings?: Prisma.BookingListRelationFilter
 }
 
 export type EventOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   total_seats?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   bookings?: Prisma.BookingOrderByRelationAggregateInput
 }
 
 export type EventWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  slug?: string
   AND?: Prisma.EventWhereInput | Prisma.EventWhereInput[]
   OR?: Prisma.EventWhereInput[]
   NOT?: Prisma.EventWhereInput | Prisma.EventWhereInput[]
   name?: Prisma.StringFilter<"Event"> | string
   total_seats?: Prisma.IntFilter<"Event"> | number
-  createdAt?: Prisma.DateTimeFilter<"Event"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Event"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"Event"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Event"> | Date | string
   bookings?: Prisma.BookingListRelationFilter
-}, "id">
+}, "id" | "slug">
 
 export type EventOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   total_seats?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.EventCountOrderByAggregateInput
   _avg?: Prisma.EventAvgOrderByAggregateInput
   _max?: Prisma.EventMaxOrderByAggregateInput
@@ -261,75 +272,84 @@ export type EventScalarWhereWithAggregatesInput = {
   OR?: Prisma.EventScalarWhereWithAggregatesInput[]
   NOT?: Prisma.EventScalarWhereWithAggregatesInput | Prisma.EventScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Event"> | number
+  slug?: Prisma.StringWithAggregatesFilter<"Event"> | string
   name?: Prisma.StringWithAggregatesFilter<"Event"> | string
   total_seats?: Prisma.IntWithAggregatesFilter<"Event"> | number
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Event"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Event"> | Date | string
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"Event"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"Event"> | Date | string
 }
 
 export type EventCreateInput = {
+  slug: string
   name: string
   total_seats: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
   bookings?: Prisma.BookingCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateInput = {
   id?: number
+  slug: string
   name: string
   total_seats: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventUpdateInput = {
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   total_seats?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookings?: Prisma.BookingUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   total_seats?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateManyInput = {
   id?: number
+  slug: string
   name: string
   total_seats: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type EventUpdateManyMutationInput = {
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   total_seats?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EventUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   total_seats?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EventCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   total_seats?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type EventAvgOrderByAggregateInput = {
@@ -339,18 +359,20 @@ export type EventAvgOrderByAggregateInput = {
 
 export type EventMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   total_seats?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type EventMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   total_seats?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type EventSumOrderByAggregateInput = {
@@ -361,6 +383,22 @@ export type EventSumOrderByAggregateInput = {
 export type EventScalarRelationFilter = {
   is?: Prisma.EventWhereInput
   isNot?: Prisma.EventWhereInput
+}
+
+export type StringFieldUpdateOperationsInput = {
+  set?: string
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type EventCreateNestedOneWithoutBookingsInput = {
@@ -378,18 +416,20 @@ export type EventUpdateOneRequiredWithoutBookingsNestedInput = {
 }
 
 export type EventCreateWithoutBookingsInput = {
+  slug: string
   name: string
   total_seats: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type EventUncheckedCreateWithoutBookingsInput = {
   id?: number
+  slug: string
   name: string
   total_seats: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type EventCreateOrConnectWithoutBookingsInput = {
@@ -409,18 +449,20 @@ export type EventUpdateToOneWithWhereWithoutBookingsInput = {
 }
 
 export type EventUpdateWithoutBookingsInput = {
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   total_seats?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EventUncheckedUpdateWithoutBookingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   total_seats?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -456,39 +498,43 @@ export type EventCountOutputTypeCountBookingsArgs<ExtArgs extends runtime.Types.
 
 export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  slug?: boolean
   name?: boolean
   total_seats?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   bookings?: boolean | Prisma.Event$bookingsArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
 
 export type EventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  slug?: boolean
   name?: boolean
   total_seats?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }, ExtArgs["result"]["event"]>
 
 export type EventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  slug?: boolean
   name?: boolean
   total_seats?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }, ExtArgs["result"]["event"]>
 
 export type EventSelectScalar = {
   id?: boolean
+  slug?: boolean
   name?: boolean
   total_seats?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "total_seats" | "createdAt" | "updatedAt", ExtArgs["result"]["event"]>
+export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "name" | "total_seats" | "created_at" | "updated_at", ExtArgs["result"]["event"]>
 export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bookings?: boolean | Prisma.Event$bookingsArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
@@ -503,10 +549,11 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    slug: string
     name: string
     total_seats: number
-    createdAt: Date
-    updatedAt: Date
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["event"]>
   composites: {}
 }
@@ -932,10 +979,11 @@ export interface Prisma__EventClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface EventFieldRefs {
   readonly id: Prisma.FieldRef<"Event", 'Int'>
+  readonly slug: Prisma.FieldRef<"Event", 'String'>
   readonly name: Prisma.FieldRef<"Event", 'String'>
   readonly total_seats: Prisma.FieldRef<"Event", 'Int'>
-  readonly createdAt: Prisma.FieldRef<"Event", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"Event", 'DateTime'>
+  readonly created_at: Prisma.FieldRef<"Event", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"Event", 'DateTime'>
 }
     
 
