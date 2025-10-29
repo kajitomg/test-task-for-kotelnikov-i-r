@@ -7,6 +7,6 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Event.ts'
-export type * from './models/Booking.ts'
-export type * from './commonInputTypes.ts'
+export type * from './models/Event.js'
+export type * from './models/Booking.js'
+export type * from './commonInputTypes.js'

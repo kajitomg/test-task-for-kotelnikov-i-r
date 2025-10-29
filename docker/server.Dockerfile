@@ -37,13 +37,14 @@ RUN npx prisma generate
 
 FROM base AS builder
 
-COPY --from=dependencies /opt/app/node_modules ./node_modules
-
 COPY . .
+
+COPY --from=deploy /opt/app/src/generated ./src/generated
+COPY --from=dependencies /opt/app/node_modules ./node_modules
 
 RUN npm run build
 
-RUN npm ci --only=production
+RUN npm prune --production
 
 
 
@@ -65,4 +66,4 @@ EXPOSE 3000
 
 ENV NODE_ENV=production
 
-CMD ["npmx", "run", "start"]
+CMD ["npm", "run", "start"]
