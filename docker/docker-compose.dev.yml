@@ -7,7 +7,7 @@ services:
       target: dev
     depends_on:
       database:
-        condition: service_started
+        condition: service_healthy
     env_file:
       - ../.env.example
       - ../server/.env
@@ -32,6 +32,12 @@ services:
       - ${POSTGRES_PORT}:5432
     networks:
       - server-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   pgadmin:
     container_name: pgadmin

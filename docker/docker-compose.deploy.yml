@@ -1,5 +1,24 @@
 services:
 
+  deploy:
+    container_name: deploy
+    build:
+      context: ../server
+      dockerfile: ../docker/server.Dockerfile
+      target: deploy
+    env_file:
+      - ../.env.example
+      - ../server/.env
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - server-network
+    volumes:
+      - ../server/src:/opt/app/src
+      - ../server/prisma:/opt/app/prisma
+    command: npm run prisma:deploy
+
   database:
     container_name: database
     image: postgres:alpine
@@ -11,24 +30,12 @@ services:
       - ${POSTGRES_PORT}:5432
     networks:
       - server-network
-
-  deploy:
-    container_name: deploy
-    build:
-      context: ../server
-      dockerfile: ../docker/server.Dockerfile
-      target: deploy
-    env_file:
-      - ../.env.example
-      - ../server/.env
-    depends_on:
-      - database
-    networks:
-      - server-network
-    volumes:
-      - ../server/src:/opt/app/src
-      - ../server/prisma:/opt/app/prisma
-    command: npm run prisma:deploy
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
 volumes:
   database_data:
