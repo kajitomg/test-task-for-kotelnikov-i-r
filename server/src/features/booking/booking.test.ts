@@ -2,12 +2,12 @@ import { describe, expect, beforeAll, beforeEach, afterAll, test } from 'vitest'
 import { App } from '../../app.js';
 import request from 'supertest'
 import { prisma } from '../../database.js';
-import { Event } from '../../generated/prisma/client.js';
+import { Event, User } from '../../generated/prisma/client.js';
 
 describe('/api/v1/booking/reserve', () => {
   let setup: {
     app: ReturnType<typeof App>,
-    users: {id: string}[],
+    users: User[],
     eventManySeats: Event,
     eventOneSeat: Event
   }
@@ -15,9 +15,14 @@ describe('/api/v1/booking/reserve', () => {
   beforeAll(async () => {
     const app = App()
     
-    const users = Array.from({ length: 6 }, (_, i) =>
-      ({id: `Test User ${i}`})
-    )
+    const users = await Promise.all(Array.from({ length: 10 }, (_, i) =>
+      prisma.user.create({
+        data: {
+          id: `Test Booking User ${i}`,
+          name: `Test Booking User ${i}`,
+        }
+      })
+    ))
     
     const eventManySeats = await prisma.event.create({
       data: {
@@ -50,6 +55,11 @@ describe('/api/v1/booking/reserve', () => {
     if (setup?.users?.length) {
       await prisma.booking.deleteMany({
         where: { user_id: { in: setup.users.map(u => u.id) } }
+      })
+    }
+    if (setup?.users?.length) {
+      await prisma.user.deleteMany({
+        where: { id: { in: setup.users.map(u => u.id) } }
       })
     }
     if (setup?.eventManySeats) {
